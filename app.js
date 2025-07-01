@@ -4,6 +4,7 @@ const connectDB = require('./config/mongoose');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+require("dotenv").config();
 connectDB(); 
 const Note = require('./models/Note'); 
 const User = require('./models/User');
