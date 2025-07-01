@@ -15,12 +15,15 @@ const fs = require('fs');
 
 
 app.use(session({
-  secret: 'khatabook_secret_key', 
+  secret: process.env.SESSION_SECRET || 'khatabook_secret_key', 
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/khatabookDB' }),
+  store: MongoStore.create({ 
+    mongoUrl: process.env.MONGO_URI  
+  }),
   cookie: { maxAge: 1000 * 60 * 60 * 24 } 
 }));
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, "public")));
