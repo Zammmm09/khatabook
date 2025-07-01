@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Hisaab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-100 font-[Helvetica]">
+
+  <!-- Navbar -->
+  <nav class="flex px-10 justify-between py-5 bg-white shadow">
+    <h3 class="text-2xl tracking-tight font-semibold">Khaatabook</h3>
+    <div class="flex gap-5 items-center">
+      <a href="/" class="text-blue-600 hover:underline">Home</a>
+      <a href="/create" class="text-blue-600 hover:underline">Create New Hisaab</a>
+    </div>
+  </nav>
+
+  <!-- Edit Form -->
+  <div class="px-10 mt-10">
+    <h3 class="text-2xl font-medium mb-5">Edit Hisaab</h3>
+
+    <!-- 🔔 Alert if password is set -->
+    <% if (password) { %>
+      <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded mb-6">
+        <strong>Note:</strong> This note is password protected.<br>
+        To share this note publicly, please remove the password and save.
+      </div>
+    <% } %>
+
+    <form action="/update/<%= id %>" method="POST" class="space-y-5 w-full max-w-xl">
+
+      <!-- Title -->
+      <input
+        type="text"
+        name="title"
+        value="<%= filename %>"
+        required
+        class="w-full px-4 py-2 rounded-md bg-zinc-200 text-lg"
+      >
+
+      <!-- Body -->
+      <textarea
+        name="content"
+        required
+        class="w-full min-h-60 px-4 py-2 bg-zinc-200 rounded-md text-base resize-none"
+      ><%= filedata %></textarea>
+
+      <!-- New Password -->
+      <input
+        type="password"
+        name="password"
+        placeholder="Update password (leave blank to keep current)"
+        class="w-full px-4 py-2 rounded-md bg-zinc-200 text-base"
+      >
+
+      <!-- Remove Password Checkbox -->
+      <div class="flex items-center gap-2">
+        <input type="checkbox" name="removePassword" id="removePassword" class="w-4 h-4">
+        <label for="removePassword" class="text-zinc-700 text-sm">Remove password from this note</label>
+      </div>
+
+      <!-- Submit -->
+      <input
+        type="submit"
+        value="Update Hisaab"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md cursor-pointer text-lg"
+      >
+    </form>
+  </div>
+</body>
+</html>
