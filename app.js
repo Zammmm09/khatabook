@@ -225,7 +225,7 @@ app.post("/update/:id", async (req, res) => {
     if (req.body.removePassword) {
       updateData.password = null;
     }
-    // ✅ If a new password is provided
+    
     else if (req.body.password && req.body.password.trim() !== "") {
       updateData.password = await bcrypt.hash(req.body.password, 10);
     }
